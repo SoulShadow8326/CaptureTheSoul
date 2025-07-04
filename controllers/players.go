@@ -28,6 +28,28 @@ func Index(w http.ResponseWriter, r *http.Request){
 			http.Error(w, "failed to create player session", http.StatusInternalServerError)
 			return
 		}
+		shortID := sessionID[:5]
+		host := "player-"+shortID+".ctf.local"
+		port := 9000+len(sessionID)%1000
+		_, err = database.DB.Exec(`
+			INSERT INTO services (session_id, host, port)
+			VALUES (?,?,?)
+		`, sessionID, host, port)
+		if err != nil{
+			http.Error(w, "failed to assign a service", http.StatusInternalServerError)
+			return
+		}
+		flag:="CTS{"+uuid.New().String()[:8]+"}"
+		value := 100
+		_, err = database.DB.Exec(`
+			INSERT INTO flags (flag, owner_session_id, value)
+			VALUES (?, ?, ?)
+		`, flag, sessionID, value)
+
+		if err != nil{
+			http.Error(w, "failed to assign a flag", http.StatusInternalServerError)
+			return
+		}
 	} else {
 		sessionID = cookie.Value
 		var exists string
