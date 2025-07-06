@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CaptureTheSoul</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-title">CaptureTheSoul_</div>
+    <div class="nav-links">
+      <a href="#">Available Targets</a>
+      <a href="#">Submit Flag</a>
+      <a href="#">Scoreboard</a>
+    </div>
+  </nav>
+
+  <div class="terminal-window">
+    <div class="title-bar">
+      <div class="buttons">
+        <span class="btn red"></span>
+        <span class="btn yellow"></span>
+        <span class="btn green"></span>
+      </div>
+      <div class="title">CaptureTheSoul</div>
+    </div>
+    <div class="terminal-output" id="output">
+      <div>&gt; Welcome to CaptureTheSoul</div>
+      <div>&gt; Type <code>targets</code> to list services</div>
+      <div>&gt; Type <code>submit CTS{...}</code> to submit a flag</div>
+    </div>
+    <div class="terminal-input">
+      <span>&gt;</span>
+      <input type="text" id="input" autofocus />
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

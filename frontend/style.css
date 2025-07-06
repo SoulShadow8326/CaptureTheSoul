@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.navbar {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  background: #111;
+  color: #2977F5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  border-bottom: 1px solid #222;
+}
+
+.nav-links a {
+  color: #2977F5;
+  text-decoration: none;
+  margin-left: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+.terminal-window {
+  background: #1e1e1e;
+  width: 90%;
+  max-width: 900px;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #444;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  height: 75vh;
+}
+
+.title-bar {
+  background: #2b2b2b;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  color: #2977F5;
+  font-size: 13px;
+  text-shadow: 0 0 4px #2977F5;
+}
+
+.terminal-output {
+  flex-grow: 1;
+  padding: 14px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.terminal-input {
+  background: #111;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  border-top: 1px solid #333;
+}
+
+.terminal-input input {
+  background: transparent;
+  border: none;
+  color: #2977F5;
+  font-family: inherit;
+  font-size: inherit;
+  flex-grow: 1;
+  outline: none;
+  caret-color: #2977F5;
+  border-bottom: 1px solid #2977F5;
+  padding: 2px;
+}
+
+code {
+  color: #2977F5;
+}
