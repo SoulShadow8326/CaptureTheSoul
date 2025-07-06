@@ -29,8 +29,8 @@ func createTables() {
 
 	createFlagsTable := `
 	CREATE TABLE IF NOT EXISTS flags (
-		flag TEXT PRIMARY KEY,
-		owner_session_id TEXT,
+		session_id TEXT PRIMARY KEY,
+		flag TEXT NOT NULL,
 		value INTEGER DEFAULT 100
 	);`
 
@@ -45,17 +45,11 @@ func createTables() {
 	createServicesTable := `
 	CREATE TABLE IF NOT EXISTS services (
 		session_id TEXT PRIMARY KEY,
-		host TEXT NOT NULL,
 		port INTEGER NOT NULL,
-		last_check DATETIME
+		container_id TEXT NOT NULL
 	);`
 
-	_, err := DB.Exec(createServicesTable)
-	if err != nil {
-		log.Fatal("failed to create services table:", err)
-	}
-
-	_, err = DB.Exec(createPlayerTable)
+	_, err := DB.Exec(createPlayerTable)
 	if err != nil {
 		log.Fatal("failed to create players table:", err)
 	}
@@ -68,5 +62,10 @@ func createTables() {
 	_, err = DB.Exec(createSubmissionsTable)
 	if err != nil {
 		log.Fatal("failed to create submissions table:", err)
+	}
+
+	_, err = DB.Exec(createServicesTable)
+	if err != nil {
+		log.Fatal("failed to create services table:", err)
 	}
 }

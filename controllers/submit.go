@@ -1,6 +1,6 @@
-package controllers 
+package controllers
 
-import(
+import (
 	"CaptureTheSoul/database"
 	"database/sql"
 	"io"
@@ -8,9 +8,10 @@ import(
 	"regexp"
 	"strings"
 )
+
 var flagPattern = regexp.MustCompile(`^CTS\{[a-zA-Z0-9_\-]+\}$`)
 
-func SubmitFlag(w http.ResponseWriter, r *http.Request){
+func SubmitFlag(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("session_id")
 	if err != nil || cookie.Value == "" {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
@@ -18,22 +19,22 @@ func SubmitFlag(w http.ResponseWriter, r *http.Request){
 	}
 	sessionID := cookie.Value
 
-
 	body, err := io.ReadAll(r.Body)
-	if err != nil{
+	if err != nil {
 		http.Error(w, "invalid", http.StatusBadRequest)
 		return
 	}
 	flag := strings.TrimSpace(string(body))
 
-	if !flagPattern.MatchString(flag){
+	if !flagPattern.MatchString(flag) {
 		http.Error(w, "invalid", http.StatusBadRequest)
 		return
 	}
+
 	var owner string
 	var value int
 	err = database.DB.QueryRow(`
-		SELECT owner_session_id, value FROM flags WHERE flag = ?
+		SELECT session_id, value FROM flags WHERE flag = ?
 	`, flag).Scan(&owner, &value)
 
 	if err == sql.ErrNoRows {
@@ -43,10 +44,12 @@ func SubmitFlag(w http.ResponseWriter, r *http.Request){
 		http.Error(w, "Database error", http.StatusInternalServerError)
 		return
 	}
+
 	if owner == sessionID {
 		http.Error(w, "owners cannot submit their own flags", http.StatusForbidden)
 		return
 	}
+
 	var exists int
 	err = database.DB.QueryRow(`
 		SELECT COUNT(*) FROM submissions

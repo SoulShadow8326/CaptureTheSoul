@@ -46,6 +46,7 @@ func DefendStatus(w http.ResponseWriter, r *http.Request){
 		Host: host,
 		Port: port,
 		Status: "online",
+		Flag: flag,
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)

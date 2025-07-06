@@ -11,4 +11,5 @@ func SetupRoutes(){
 	http.HandleFunc("/submit", controllers.SubmitFlag)
 	http.HandleFunc("/scoreboard", controllers.Scoreboard)
 	http.HandleFunc("/defend", controllers.DefendStatus)
+	http.HandleFunc("/logout", controllers.Logout)
 }
